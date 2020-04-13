@@ -13,160 +13,6 @@
     clear: both;
 }
 
-body {
-    background-image: url(images/tlo2.jpg);
-    font-family: 'Fira Sans', sans-serif;
-    padding-top: 30px;
-    color: white;
-    text-align: center;
-}
-
-.kontener {
-    width: 410px;
-    max-width: 410px;
-    margin: 0 auto;
-}
-
-#login {
-    padding: 0px 26px 26px;
-    background: #FFF;
-    box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.4),
-    0px 4px 20px rgba(0, 0, 0, 0.33);
-
-    display: table;
-    position: static;
-}
-
-#login .header {
-    margin-bottom: 4px;
-}
-
-#login .header h3 {
-    color: black;
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    margin-top: 20px;
-
-}
-
-#login .header p {
-
-    color: lightgrey;
-    font-size: 16px;
-    font-weight: 310;
-}
-
-#login .line {
-    height: 1px;
-    background: white;
-    width: 406px;
-    margin: 0px -25px;
-}
-
-#login .inputs {
-    margin-top: 25px;
-}
-
-#login .inputs label {
-    color: rgb(148, 147, 147);
-    font-size: 13px;
-    font-weight: 302;
-    letter-spacing: 0.5x;
-    margin-bottom: 8px;
-    display: block;
-}
-
-#input::-webkit-input-placeholder {
-    color: #B5B5B5;
-
-}
-
-input:-moz-placeholder {
-    color: #B5B5B5;
-}
-
-#login .inputs input[type=email],
-input[type=haslo],
-input[type=imie],
-input[type=nazwisko],
-input[type=powtorzEmail],
-input[type=telefon],
-input[type=powtorzHaslo] {
-    background: #F5F5F5;
-    font-size: 0.8rem;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: none;
-    padding: 13px 10px;
-    width: 330px;
-    margin-bottom: 20px;
-    box-shadow: inset 0px 2px 3px rgba(0, 0, 0, 0.1);
-    clear: both;
-
-}
-
-#login .inputs input[type=email]:focus,
-input[type=haslo]:focus,
-input[type=imie]:focus,
-input[type=nazwisko]:focus,
-input[type=powtorzEmail]:focus,
-input[type=telefon]:focus,
-input[type=powtorzHaslo]:focus {
-    background: #FFF;
-    box-shadow: 0px, 0px, 0px, 3px #FFF38e, inset 0px 2px 3px rgba(0, 0, 0, 0.2),
-    0px 5px, 5px rgba(5, 5, 5, 0.15);
-    outline: none;
-}
-
-#login .inputs #przycisk {
-    width: 100%;
-    margin-top: 20px;
-    padding: 15px 0;
-    color: white;
-    font-size: 14px;
-    text-align: center;
-    text-decoration: none;
-
-    background: -webkit-gradient(linear, left top, left bottom,
-    from(#b9c5dd),
-    to(#a5b1ce));
-
-    border-radius: 5px;
-    display: table;
-    position: static;
-    clear: both;
-
-}
-
-#login .inputs #przycisk:hover {
-    color: red;
-    cursor: pointer;
-
-}
-
-
-footer {
-    text-align: center;
-    margin-top: 40px;
-}
-
-@media (min-width: 360px) {}@charset "UTF-8";
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-.clearfix::after {
-
-    content: "";
-    display: block;
-    clear: both;
-}
-
 
 body {
     background-image: url(images/tlo2.jpg);
@@ -246,12 +92,12 @@ input:-moz-placeholder {
 }
 
 #register .inputs input[type=email],
-input[type=haslo],
+input[type=password],
 input[type=imie],
 input[type=nazwisko],
 input[type=powtorzEmail],
 input[type=telefon],
-input[type=powtorzHaslo] {
+input[type=password] {
     background: #F5F5F5;
     font-size: 0.8rem;
     -moz-border-radius: 3px;
@@ -267,12 +113,12 @@ input[type=powtorzHaslo] {
 }
 
 #register .inputs input[type=email]:focus,
-input[type=haslo]:focus,
+input[type=password]:focus,
 input[type=imie]:focus,
 input[type=nazwisko]:focus,
 input[type=powtorzEmail]:focus,
 input[type=telefon]:focus,
-input[type=powtorzHaslo]:focus {
+input[type=password]:focus {
     background: #FFF;
     box-shadow: 0px, 0px, 0px, 3px #FFF38e, inset 0px 2px 3px rgba(0, 0, 0, 0.2),
     0px 5px, 5px rgba(5, 5, 5, 0.15);
@@ -310,130 +156,3 @@ footer {
     text-align: center;
     margin-top: 40px;
 }
-
-@media (min-width:533px) {}
-
-@media (orientation:landscape)and (min-width:411px) {}
-
-@media (orientation:landscape)and (min-width:812px) {}
-
-@media (orientation:landscape)and (min-width:1600px) {}
-
-@media(orientation: portrait) and (min-width:320px) {}
-
-@media(orientation: portrait) and (min-width:360px) {
-    .kontener {
-
-        max-width: 300px;
-        margin: 0 auto;
-    }
-
-    body {
-        background-image: url(images/tlo2.jpg);
-        font-family: 'Fira Sans', sans-serif;
-        padding-top: 20px;
-        color: white;
-        text-align: center;
-    }
-
-    #login {
-        padding: 0px 0px 0px;
-        box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.4),
-        0px 4px 20px rgba(0, 0, 0, 0.33);
-
-        display: table;
-        position: static;
-    }
-
-    #login .header h3 {
-        color: black;
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        margin-top: 20px;
-
-    }
-
-    #login .header p {
-
-        color: lightgrey;
-        font-size: 10px;
-        font-weight: 310;
-    }
-
-    #login .inputs label {
-        color: rgb(148, 147, 147);
-        font-size: 8px;
-        font-weight: 302;
-        letter-spacing: 0.5x;
-        margin-bottom: 8px;
-        display: block;
-    }
-
-    #login .inputs #przycisk {
-        width: 100%;
-        margin-top: 20px;
-        padding: 15px 0;
-        color: white;
-        font-size: 10px;
-        text-align: center;
-        text-decoration: none;
-
-        background: -webkit-gradient(linear, left top, left bottom,
-        from(#b9c5dd),
-        to(#a5b1ce));
-
-        border-radius: 5px;
-        display: table;
-        position: static;
-        clear: both;
-
-    }
-
-    footer {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-
-}
-
-@media(orientation: portrait) and (min-width:411px) {}
-
-@media(orientation: portrait) and (min-width:414px) {}
-
-
-@media(orientation: portrait) and (min-width:768px) {}
-
-@media(orientation: landscape) {}
-
-@media (orientation:landscape)and (min-width:411px) {}
-
-
-@media (orientation:landscape)and (min-width:533px) {}
-
-@media (orientation:landscape)and (min-width:568px) {}
-
-@media (orientation:landscape)and (min-width:640px) {}
-
-@media (orientation:landscape)and (min-width:667px) {}
-
-@media (orientation:landscape)and (min-width:812px) {}
-
-@media (orientation:landscape)and (min-width:840px) {}
-
-@media (orientation:landscape)and (min-width:866px) {}
-
-
-@media (orientation:landscape)and (min-width:1024px) {}
-
-@media (orientation:landscape)and (min-width:1140px) {}
-
-
-@media (orientation:landscape)and (min-width:1220px) {}
-
-@media (orientation:landscape)and (min-width:1280px) {}
-
-@media (orientation:landscape)and (min-width:1600px) {}
-
-@media (min-width: 1024px) {}
