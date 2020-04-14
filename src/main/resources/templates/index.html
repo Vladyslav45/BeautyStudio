@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css" type="text/css">
 
 <head>
     <meta charset="utf-8">
@@ -9,7 +11,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" media="screen" th:href="@{/css/style.css}" href="../static/css/style.css" type="text/css">
 
 </head>
 
@@ -23,9 +25,11 @@
 
     </hgroup>
 
-    <button><a href="#onas">Zobacz nasz salon</a></button>
+        <button><a href="#onas">Zobacz nasz salon</a></button>
+        <button class="button1" sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj sie</a></button>
+        <button class="button1" sec:authorize="isAuthenticated()"><a>Dodaj usluge</a></button>
 
-    <img src="images/brunetka.jpg" alt="Zdięcie Salon kosmetyczny Nowa WySpa">
+    <img th:src="@{/images/brunetka.jpg}" alt="Zdięcie Salon kosmetyczny Nowa WySpa">
 
 
 
@@ -37,6 +41,16 @@
     <aside class="active">
         <nav>Menu</nav>
         <ul>
+            <li sec:authorize="hasAuthority('ROLE_USER')">
+                User Page
+            </li>
+
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')">
+                Admin page
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}">Sing out</a>
+            </li>
             <li>
                 <a href="#onas">
                     O nas
@@ -74,21 +88,21 @@
 <section id="onas">
     <section class="features clearfix">
         <div class="feature">
-            <img src="images/SalonNowaWyspa1.jpg" alt="Oferta salonu kosmetycznego">
+            <img th:src="@{/images/SalonNowaWyspa2.jpg}" alt="Oferta salonu kosmetycznego">
             <h2>Salon kosmetyczny "Nowa WySpa"</h2>
             <p class="description">Położony jest na ulicy Długiej w Zgierzu, to nie tylko centrum miasta,ale także centrum urody i zdrowia. W naszym gabinecie możesz liczyć na fachowe doradztwo i opiekę ekspertów. Każdy zabieg w naszym gabinecie to niezwykłe doświadczenie, które chce się przeżywać na nowo. Gabinet kosmetyczny "Nowa WySPA powstał z wizją budowania długotrwałych relacji z Klientami, dlatego cieszymy się, gdy Ci z Państwa, którzy przyszli do nas pierwszy raz, tak chętnie umawiają się na kolejną wizytę.</p>
 
         </div>
 
         <div class="feature">
-            <img src="images/bezpiecz.png" alt="Oferta salonu kosmetycznego">
+            <img th:src="@{/images/SalonNowaWyspa3.jpg}" alt="Oferta salonu kosmetycznego">
             <h2>Bezpieczeństwo zabiegów</h2>
             <p class="description">Podczas zabiegów korzystamy z materiałów jednorazowych (igły, czepki, ręczniki itp.). W przypadku rzeczy używanych wielokrotnie (cążki, nożyczki, pęsety, frezy) wszystko STERYLIZUJEMY W AUTOKLAWIE.Sterylizacja narzędzi w autoklawie to jedyny skuteczny sposób, by przygotować je do użycia w trakcie zabiegu. Każda inna metoda (sterylizator kulkowy, myjka ultradźwiękowa) jest dezynfekcją i nie zapewnia Pacjentowi całkowitego bezpieczeństwa. Wykonywanie zabiegów niesterylnymi narzędziami stanowi zagrożenie dla zdrowia (Pacjentowi grozi zarażenie się wirusem HIV, WZW, brodawczakami czy grzybicą).</p>
 
         </div>
 
         <div class="feature">
-            <img src="images/SalonNowaWyspa4.jpg">
+            <img th:src="@{/images/SalonNowaWyspa4.jpg}">
             <h2>Wykorzystujemy wysokiej jakości kosmetyki</h2>
             <p class="description">Skóra każdego człowieka jest inna i wyjątkowa. Dlatego nie ma pewności, że dany gotowy schemat zabiegowy, narzucony przez firmy kosmetyczne, będzie odpowiedni właśnie dla Ciebie. Korzystając z informacji uzyskanych podczas wywiadu oraz wiedzy i wieloletniego doświadczenia, potrafimy precyzyjnie określić potrzeby Twojej skóry. Na tej podstawie tworzymy indywidualne programy pomagające rozwiązać każdy problem ze skórą. W razie potrzeby konsultujemy się z lekarzem dermatologiem.</p>
 
@@ -100,7 +114,7 @@
     <h1>Usługi jakie świadczymy</h1>
     <div class="project clearfix">
         <div class="web">
-            <img src="images/glowna.png" alt="portfolio przykład 1">
+            <img th:src="@{/images/glowna.png}" alt="portfolio przykład 1">
         </div>
         <div class="about">
             <h2>Zabiegi na twarz</h2>
@@ -115,7 +129,7 @@
     </div>
     <div class="project clearfix">
         <div class="web">
-            <img src="images/cialo-balsam.jpg" alt="portfolio przykład 2">
+            <img th:src="@{/images/cialo-balsam.jpg}" alt="portfolio przykład 2">
         </div>
         <div class="about">
             <h2>Zabiegi na ciało</h2>
@@ -127,7 +141,7 @@
     </div>
     <div class="project clearfix">
         <div class="web">
-            <img src="images/paznokcie" alt="portfolio przykład 3">
+            <img th:src="@{/images/paznokcie}"  alt="portfolio przykład 3">
         </div>
         <div class="about">
             <h2>Manicure / Pedicure</h2>
@@ -139,7 +153,7 @@
     </div>
     <div class="project clearfix">
         <div class="web">
-            <img src="images/IPl.jpg" alt="portfolio przykład 4">
+            <img th:src="@{/images/IPl.jpg}" alt="portfolio przykład 4">
         </div>
         <div class="about">
             <h2>Laser IPL</h2>
@@ -344,9 +358,9 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d616.0925038380332!2d19.420552829257122!3d51.85419889873085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471bb67659e90187%3A0x9aeed5b48a1a5981!2sNowa%20Wyspa.%20Us%C5%82ugi%20kosmetyczne.%20Janiak%20E.!5e1!3m2!1spl!2spl!4v1571245762977!5m2!1spl!2spl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
         </form>
         <div class="socials">
-            <div class="social clearfix"><img src="images/contact1.png" alt="kontakt"><span>nowa.wyspa@cary-koń.pl</span></div>
-            <div class="social clearfix"><img src="images/contact2.png" alt="kontakt"><span>518 418 798</span></div>
-            <div class="social clearfix"><img src="images/contact3.png" alt="kontakt"><span>Salon kosmetyczny Nowa Wyspa</span></div>
+            <div class="social clearfix"><img th:src="@{/images/contact1.png}"  alt="kontakt"><span>nowa.wyspa@cary-koń.pl</span></div>
+            <div class="social clearfix"><img th:src="@{/images/contact2.png}" alt="kontakt"><span>518 418 798</span></div>
+            <div class="social clearfix"><img th:src="@{/images/contact3.png}" alt="kontakt"><span>Salon kosmetyczny Nowa Wyspa</span></div>
 
 
         </div>
@@ -357,7 +371,7 @@
 </section>
 <footer>Salon kosmetyczny Nowa WySPA, project Dawid, Vlad, Andrzej &copy;</footer>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="script.js"></script>
+<script th:src="@{/js/script.js}" src="../static/js/script.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </body>
