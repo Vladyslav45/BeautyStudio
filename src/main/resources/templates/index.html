@@ -31,9 +31,6 @@
 
     <img th:src="@{/images/brunetka.jpg}" alt="Zdięcie Salon kosmetyczny Nowa WySpa">
 
-
-
-
     <div class="burger">
         <i class="fas fa-bars show active "></i>
         <i class="fas fa-times active"></i>
@@ -41,13 +38,6 @@
     <aside class="active">
         <nav>Menu</nav>
         <ul>
-            <li sec:authorize="hasAuthority('ROLE_USER')">
-                User Page
-            </li>
-
-            <li sec:authorize="hasAuthority('ROLE_ADMIN')">
-                Admin page
-            </li>
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/logout}">Sing out</a>
             </li>

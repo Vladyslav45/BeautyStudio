@@ -4,7 +4,6 @@ import com.beautystudio.studio.model.User;
 import com.beautystudio.studio.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,20 +21,12 @@ public class UserController {
     private IUserService iUserService;
 
     @GetMapping(value = "/")
-    public String showFormHome(){
-        return "index";
-    }
-
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping(value = "/home")
-    public String showRolePage(Model model){
+    public String showRolePage(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = iUserService.findByEmail(authentication.getName());
-        model.addAttribute("user", user);
-        return "index";
+        return check(user);
     }
 
-    @PreAuthorize("isAnonymous()")
     @GetMapping(value = {"/login"})
     public String login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "logout", required = false) String logout,
@@ -63,5 +54,14 @@ public class UserController {
         } else {
             return "register";
         }
+    }
+
+    private String check(User user){
+        if (user == null || user.getRole().getRoleType().equals("ROLE_USER")){
+            return "index";
+        } else if (user.getRole().getRoleType().equals("ROLE_ADMIN")){
+            return "redirect:/admin/main";
+        }
+        return null;
     }
 }

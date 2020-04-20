@@ -24,11 +24,9 @@ public class UserServiceImpl implements IUserService {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
-        Role role = new Role();
-        role.setRoleType("ROLE_USER");
-        role.setUser(user);
+        Role role = roleRepository.findByRoleType("ROLE_USER");
+        user.setRole(role);
         userRepository.save(user);
-        roleRepository.save(role);
     }
 
     @Override

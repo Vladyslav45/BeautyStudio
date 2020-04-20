@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/styleAdminPanel.css" th:href="@{/css/styleAdminPanel.css}">
+</head>
+<body>
+<div th:action="@{/admin/main}" th:object="${categories}">
+    <ul id="menu">
+        <li><a>Admin panel</a></li>
+        <li>
+            <a>Categories</a>
+            <ul>
+                <li><a th:href="@{/admin/addCategory}">Add category</a></li>
+                <li><a th:href="@{/admin/addSubCategory}">Add subCategory</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <section>
+        <div th:each="category : ${categories}">
+            <h2 th:text="${category.name}"></h2>
+            <div th:each="subcategory : ${category.subCategoryList}">
+                <p th:text="${subcategory.name}"></p>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+</body>
+<!--<body>-->
+
+<!--<h1>This is Admin Page</h1>-->
+<!--<div th:action="@{/admin/main}" th:object="${categories}">-->
+<!--<section>-->
+<!--<div th:each="category : ${categories}">-->
+<!--<h2 th:text="${category.name}"></h2>-->
+<!--<div th:each="subcategory : ${category.subCategoryList}">-->
+<!--<p th:text="${subcategory.name}"></p>-->
+<!--</div>-->
+
+<!--</div>-->
+<!--</section>-->
+
+<!--<div>-->
+<!--<a th:href="@{/admin/addCategory}">Add category</a>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--<a th:href="@{/admin/addSubCategory}">Add subCategory</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</body>-->
+</html>

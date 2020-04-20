@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/admin/addSubCategory}" method="post" th:object="${subcategory}">
+    <input type="text" th:field="*{name}">
+    <input type="text" th:field="*{price}">
+    <label>
+        <select th:field="*{category}">
+            <option value=""> --</option>
+            <option th:each="category : ${categories}"
+                    th:value="${category.id}"
+                    th:text="${category.name}"></option>
+        </select>
+    </label>
+    <button type="submit" value="Add SubCategory"></button>
+</form>
+
+</body>
+</html>

@@ -5,16 +5,21 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Role {
+@Table(name = "categories")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
-    private String roleType;
+    private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<SubCategory> subCategoryList;
 }
