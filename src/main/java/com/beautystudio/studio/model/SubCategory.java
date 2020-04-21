@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,6 +22,9 @@ public class SubCategory {
 
     @Column
     private double price;
+
+    @OneToMany(mappedBy = "subCategory")
+    private List<Reservation> reservation;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
