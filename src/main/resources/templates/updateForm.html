@@ -2,29 +2,58 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap" rel="stylesheet">
+    <title>upadateForm</title>
+    <link rel="stylesheet" th:href="@{/css/StyleUpdateForm.css}" href="../static/css/StyleUpdateForm.css.css" type="text/css">
 </head>
 <body>
-<form th:action="@{/update/{id} (id = ${user.id})}" method="post" th:object="${user}">
-    <label>
-        <input type="text" th:field="*{name}">
-    </label>
-    <label>
-        <input type="text" th:field="*{surname}">
-    </label>
-    <label>
-        <input type="email" th:field="*{email}">
-    </label>
-    <label>
-        <input type="text" th:field="*{phoneNumber}">
-    </label>
-    <button type="submit" value="Edit"></button>
-    <a onclick="goBack()">Back</a>
-</form>
+<main>
+    <section class="sekcja">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <form id="login" th:action="@{/update/{id} (id = ${user.id})}" method="post"
+                          th:object="${user}">
+
+                        <header>
+                            <h3>Moje konto</h3>
+                            <p>Zmiana danych</p>
+                        </header>
+
+                        <div class="line"></div>
+                        <div class="inputs">
+
+                            <input type="name" name="name" placeholder="Imię" autofocus th:field="*{name}" />
+
+                            <input type="surname" name="surname" placeholder="Nazwisko" autofocus
+                                   th:field="*{surname}" />
+
+                            <input type="email" name="email" placeholder="Email" autofocus th:field="*{email}" />
+
+
+                            <input type="phone" name="phone" placeholder="Telefon" autofocus
+                                   th:field="*{phoneNumber}" />
+
+                            <button type="submit" value="Zmień"></button>
+                            <a id="przycisk">Zatwierdź zmianę danych</a>
+                            <a onclick="goBack()">Back</a>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <footer> Project designers Vlad, Andrzej, Dawid &copy;</footer>
+        </div>
+    </section>
+</main>
 </body>
 <script>
     function goBack() {
         window.history.back();
     }
 </script>
+
 </html>
