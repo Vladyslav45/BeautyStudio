@@ -22,13 +22,14 @@
                 <li><a th:href="@{/admin/addSubCategory}">Add subCategory</a></li>
             </ul>
         </li>
+        <li><a th:href="@{/logout}">Log out</a></li>
     </ul>
 
     <section>
         <div th:each="category : ${categories}">
             <h2 th:text="${category.name}"></h2>
             <div th:each="subcategory : ${category.subCategoryList}">
-                <p th:text="${subcategory.name}"></p>
+                <p th:text="${subcategory.name} + ' - ' + ${subcategory.price} + zł"></p>
             </div>
 
         </div>
@@ -36,27 +37,4 @@
 </div>
 
 </body>
-<!--<body>-->
-
-<!--<h1>This is Admin Page</h1>-->
-<!--<div th:action="@{/admin/main}" th:object="${categories}">-->
-<!--<section>-->
-<!--<div th:each="category : ${categories}">-->
-<!--<h2 th:text="${category.name}"></h2>-->
-<!--<div th:each="subcategory : ${category.subCategoryList}">-->
-<!--<p th:text="${subcategory.name}"></p>-->
-<!--</div>-->
-
-<!--</div>-->
-<!--</section>-->
-
-<!--<div>-->
-<!--<a th:href="@{/admin/addCategory}">Add category</a>-->
-<!--</div>-->
-
-<!--<div>-->
-<!--<a th:href="@{/admin/addSubCategory}">Add subCategory</a>-->
-<!--</div>-->
-<!--</div>-->
-<!--</body>-->
 </html>

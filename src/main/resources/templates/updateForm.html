@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/update/{id} (id = ${user.id})}" method="post" th:object="${user}">
+    <label>
+        <input type="text" th:field="*{name}">
+    </label>
+    <label>
+        <input type="text" th:field="*{surname}">
+    </label>
+    <label>
+        <input type="email" th:field="*{email}">
+    </label>
+    <label>
+        <input type="text" th:field="*{phoneNumber}">
+    </label>
+    <button type="submit" value="Edit"></button>
+    <a onclick="goBack()">Back</a>
+</form>
+</body>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+</html>

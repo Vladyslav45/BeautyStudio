@@ -8,10 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,10 +18,16 @@ public class UserController {
     private IUserService iUserService;
 
     @GetMapping(value = "/")
-    public String showRolePage(){
+    public String showRolePage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = iUserService.findByEmail(authentication.getName());
-        return check(user);
+        if (user == null || user.getRole().getRoleType().equals("ROLE_USER")){
+            model.addAttribute("user", user);
+            return "index";
+        } else if (user.getRole().getRoleType().equals("ROLE_ADMIN")){
+            return "redirect:/admin/main";
+        }
+        return null;
     }
 
     @GetMapping(value = {"/login"})
@@ -56,12 +59,16 @@ public class UserController {
         }
     }
 
-    private String check(User user){
-        if (user == null || user.getRole().getRoleType().equals("ROLE_USER")){
-            return "index";
-        } else if (user.getRole().getRoleType().equals("ROLE_ADMIN")){
-            return "redirect:/admin/main";
-        }
-        return null;
+    @GetMapping(value = "/update/{id}")
+    public String showUpdateForm(@PathVariable("id") Long userId, Model model){
+        User user = iUserService.findById(userId);
+        model.addAttribute("user", user);
+        return "updateForm";
+    }
+
+    @PostMapping(value = "/update/{id}")
+    public String updateUser(@ModelAttribute User user){
+        iUserService.update(user);
+        return "redirect:/";
     }
 }

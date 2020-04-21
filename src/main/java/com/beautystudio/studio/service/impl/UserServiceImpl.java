@@ -33,4 +33,20 @@ public class UserServiceImpl implements IUserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    @Override
+    public User findById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    @Override
+    public void update(User user) {
+        userRepository.findById(user.getId()).ifPresent(updateUser -> {
+            updateUser.setName(user.getName());
+            updateUser.setSurname(user.getSurname());
+            updateUser.setEmail(user.getEmail());
+            updateUser.setPhoneNumber(user.getPhoneNumber());
+            userRepository.save(updateUser);
+        });
+    }
 }
