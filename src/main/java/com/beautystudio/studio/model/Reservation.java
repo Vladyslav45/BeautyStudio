@@ -18,10 +18,6 @@ public class Reservation {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
-    @ManyToOne
     @JoinColumn(name = "subcategory_id", nullable = false)
     private SubCategory subCategory;
 

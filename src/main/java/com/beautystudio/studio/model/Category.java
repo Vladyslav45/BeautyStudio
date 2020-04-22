@@ -22,7 +22,4 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<SubCategory> subCategoryList;
-
-    @OneToMany(mappedBy = "category")
-    private List<Reservation> reservation;
 }

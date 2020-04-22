@@ -18,22 +18,14 @@
 </head>
 <body>
 <form th:action="@{/reservation/addReservation}" method="post" th:object="${reservation}">
-    <label>
-        <select th:field="*{category}">
-            <option value=""> --</option>
-            <option th:each="category : ${categoryList}"
-                    th:value="${category.id}"
-                    th:text="${category.name}"></option>
-        </select>
-    </label>
-    <label>
+    <label class="control-label">
         <select th:field="*{subCategory}">
-            <option value=""> --</option>
-            <option th:each="subcategory : ${subcategoryList}"
-                    th:value="${subcategory.id}"
-                    th:text="${subcategory.name}"></option>
+            <optgroup th:each="category : ${categoryList}" th:label="${category.name}">
+                <option th:each="subcategory : ${category.subCategoryList}" th:value="${subcategory.id}" th:text="${subcategory.name}"></option>
+            </optgroup>
         </select>
     </label>
+
     <div class="container">
         <div class="row">
             <div class='col-sm-6'>
