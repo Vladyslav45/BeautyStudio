@@ -12,16 +12,17 @@
     <link rel="stylesheet" type="text/css" href="../static/css/styleAdminPanel.css" th:href="@{/css/styleAdminPanel.css}">
 </head>
 <body>
-<div th:action="@{/admin/main}" th:object="${categories}">
+<div th:action="@{main}" th:object="${categories}">
     <ul id="menu">
         <li><a>Admin panel</a></li>
         <li>
             <a>Categories</a>
             <ul>
-                <li><a th:href="@{/admin/addCategory}">Add category</a></li>
-                <li><a th:href="@{/admin/addSubCategory}">Add subCategory</a></li>
+                <li><a th:href="@{addCategory}">Add category</a></li>
+                <li><a th:href="@{addSubCategory}">Add subCategory</a></li>
             </ul>
         </li>
+        <li><a th:href="@{reservation}">Reservations</a></li>
         <li><a th:href="@{/logout}">Log out</a></li>
     </ul>
 

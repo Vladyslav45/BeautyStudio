@@ -7,6 +7,8 @@ import com.beautystudio.studio.service.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReservationServiceImpl implements IReservationService {
 
@@ -18,6 +20,11 @@ public class ReservationServiceImpl implements IReservationService {
         reservation.setStatus(false);
         reservation.setUser(user);
         reservationRepository.save(reservation);
+    }
+
+    @Override
+    public List<Reservation> showAllReservationWithStatusFalse() {
+        return reservationRepository.findAllByStatusFalse();
     }
 
 

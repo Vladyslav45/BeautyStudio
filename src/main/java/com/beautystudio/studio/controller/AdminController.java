@@ -3,6 +3,7 @@ package com.beautystudio.studio.controller;
 import com.beautystudio.studio.model.Category;
 import com.beautystudio.studio.model.SubCategory;
 import com.beautystudio.studio.service.ICategoryService;
+import com.beautystudio.studio.service.IReservationService;
 import com.beautystudio.studio.service.ISubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private ISubCategoryService iSubCategoryService;
+
+    @Autowired
+    private IReservationService iReservationService;
 
     @PreAuthorize("isAuthenticated() and hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/main")
@@ -57,6 +61,12 @@ public class AdminController {
     public String addSubCategory(@ModelAttribute SubCategory subCategory){
         iSubCategoryService.add(subCategory);
         return "redirect:/admin/main";
+    }
+
+    @GetMapping(value = "/reservation")
+    public String showReservation(Model model){
+        model.addAttribute("reservations", iReservationService.showAllReservationWithStatusFalse());
+        return "admin/reservationListForm";
     }
 
 

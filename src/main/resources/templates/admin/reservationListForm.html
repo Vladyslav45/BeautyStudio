@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{admin/reservation}" method="post">
+    <table th:each="reservation : ${reservations}">
+        <thead>
+        <tr>
+            <th>Name user</th>
+            <th>Surname user</th>
+            <th>Category</th>
+            <th>SubCategory</th>
+            <th>Date & Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${reservation.user.name}"></td>
+            <td th:text="${reservation.user.surname}"></td>
+            <td th:text="${reservation.category.name}"></td>
+            <td th:text="${reservation.subCategory.name}"></td>
+            <td th:text="${reservation.dateTime}"></td>
+            <td><button type="submit" value="Accept"></button></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+</body>
+</html>
