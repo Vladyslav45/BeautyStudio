@@ -27,5 +27,14 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationRepository.findAllByStatusFalse();
     }
 
+    @Override
+    public void confirmReservation(Long id) {
+        reservationRepository.findById(id).ifPresent(r -> {
+            r.setStatus(true);
+            //TODO W tym miejscu implementacja wiadomości SMS że jest potwierdzona.
+            reservationRepository.save(r);
+        });
+    }
+
 
 }

@@ -33,6 +33,6 @@ public class Reservation {
     private boolean status;
 
     @Column
-    @DateTimeFormat(pattern = "MM/dd/yyyy yh:mm a")
+    @DateTimeFormat(pattern = "MM/dd/yyyy h:mm a")
     private LocalDateTime dateTime;
 }
