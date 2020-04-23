@@ -18,7 +18,7 @@ html {
 
 
 body {
-
+    width: 100%;
     background-image: url(../images/tlo2.jpg);
     font-family: 'Fira Sans', sans-serif;
     padding-top: 30px;
@@ -26,15 +26,17 @@ body {
     text-align: center;
 }
 
+
+
 header {
-    height: 25vh;
+    height: 22vh;
     position: relative;
     overflow-x: hidden;
     font-family: 'Saira Condensed',
     sans-serif;
     color: white;
-
-
+    text-align: center;
+    font-size: 20px;
     max-width: 1920px;
     margin: 0 auto;
 
@@ -43,14 +45,20 @@ header {
 
 hgroup h1 {
     color: white;
+    font: 2em sans-serif;
+    text-align: center;
 }
 
 hgroup h2 {
     color: white;
+    font: 32px sans-serif;
+    text-align: center;
 }
 
 hgroup h3 {
     color: white;
+    font: 28px sans-serif;
+    text-align: center;
 }
 
 header hgroup {
@@ -64,9 +72,9 @@ header hgroup {
 }
 
 .control-label {
-    position: absolute;
-    left: 20%;
-    top: 30%;
+    position: relative;
+    right: -35%;
+    top: 35%;
 }
 
 .input-group .form-control {
@@ -79,18 +87,24 @@ header hgroup {
 }
 
 select {
-    position: absolute;
-    left: 72rem;
-    top: -43px;
+    position: relative;
+    right: 10px;
     height: 30px;
+    width: 30rem;
+    top: 31px;
+    color: black;
 
 }
 
+form {
+    margin-top: 20px;
+    height: 64vh;
+}
 
 form button {
     position: absolute;
     width: 50%;
-    margin-top: 300px;
+    margin-top: 100px;
     margin-left: 25%;
     padding: 15px 0;
     color: white;
@@ -115,7 +129,6 @@ button:hover {
 
 
 footer {
-    position: absolute;
     bottom: 0px;
     right: 0px;
     background-color: #29a6dc;
@@ -125,4 +138,13 @@ footer {
     padding: 20px;
     width: 100%;
     font-size: 20px;
+}
+
+.ui container {
+    width: 50%;
+}
+
+.calendar {
+    width: 80rem;
+    margin-left: 30px;
 }
