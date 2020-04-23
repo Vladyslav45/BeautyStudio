@@ -2,78 +2,57 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Rezerwacja</title>
+    <title>Title</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css" rel="stylesheet"
-          type="text/css"/>
-    <link
-            href="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.css"
-            rel="stylesheet" type="text/css"/>
-    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
-    <script
-            src="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/static/css/StaticReservationForm.css" th:href="@{/css/StaticReservationForm.css}" type="text/css">
+    <script>
+        $(function() {
+            $('#datetimepicker1').datetimepicker();
+        });
     </script>
-    <link rel="stylesheet" media="screen" th:href="@{/css/StaticReservationForm.css}"
-          href="../static/css/StaticReservationForm.css" type="text/css">
-
 </head>
-
-
 <body>
-<div id="container">
-    <header>
 
-        <hgroup class="welcome">
-            <h1>Salon Kosmetyczny "Nowa WySpa"</h1>
-            <h2><span>Wasze piękno jest</span> naszą pasją</h2>
-            <h3>Rezerwacja online</h3>
+<header>
 
-        </hgroup>
-    </header>
-    <div class="nav">
-        <ol>
-            <li><a th:href="@{/}">Strona główna</a></li>
+    <hgroup class="welcome">
+        <h1>Salon Kosmetyczny "Nowa WySpa"</h1>
+        <h2><span>Wasze piękno jest</span> naszą pasją</h2>
+        <h3>Rezerwacja online</h3>
 
-        </ol>
+    </hgroup>
+</header>
 
-    </div>
-    <div class="listaRezerwacji">
-        <form th:action="@{/reservation/addReservation}" method="post" th:object="${reservation}">
-            <label class="control-label">
-                <select th:field="*{subCategory}">
-                    <optgroup th:each="category : ${categoryList}" th:label="${category.name}">
-                        <option th:each="subcategory : ${category.subCategoryList}" th:value="${subcategory.id}"
-                                th:text="${subcategory.name}"></option>
-                    </optgroup>
-                </select>
-            </label>
-
-
-            <div class="clendar">
-
-                <div class="ui calendar" id="example14">
+<form th:action="@{/reservation/addReservation}" method="post" th:object="${reservation}">
+    <label>Wybierz usluge</label><br>
+    <select class="select"  th:field="*{subCategory}">
+        <optgroup th:each="category : ${categoryList}" th:label="${category.name}">
+            <option th:each="subcategory : ${category.subCategoryList}" th:value="${subcategory.id}" th:text="${subcategory.name}"></option>
+        </optgroup>
+    </select><br>
+    <label>Wybierz date i czas</label><br>
+    <div class="container">
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' th:field="*{dateTime}" class="form-control" />
+                        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+                    </div>
                 </div>
-                <br />
-            </div>
-
-
-            <button type="submit" value="Zarezerwuj">Zarezerwuj</button>
-        </form>
+    </div><br>
+    <div>
+        <button class="reg" type="submit" value="Reserwacja">Reserwacja</button>
+    </div><br>
+    <div>
+        <a class="home" th:href="@{/}">Strona główna</a>
     </div>
-
-</div>
-<footer>Salon kosmetyczny Nowa
-    WySPA, project Vlad, Dawid, Andrzej &copy;
-</footer>
-
+</form>
 </body>
-<script>
-    $('#example14').calendar({
-
-    });
-</script>
-
 </html>
