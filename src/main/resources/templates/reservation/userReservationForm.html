@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{userReservation}" method="get" th:object="${userReservations}">
+    <table th:each="userReservation : ${userReservations}">
+        <thead>
+        <tr>
+            <th>Subcategory</th>
+            <th>Date & Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${userReservation.subCategory.name}"></td>
+            <td th:text="${userReservation.dateTime}"></td>
+            <td><a th:href="@{editReservation/{id} (id = ${userReservation.id})}">Edit</a></td>
+            <td><a th:href="@{userReservation/{reservationId} (reservationId = ${userReservation.id})}">Reject</a></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+</body>
+</html>

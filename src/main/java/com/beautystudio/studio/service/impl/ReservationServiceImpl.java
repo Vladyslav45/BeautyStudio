@@ -35,6 +35,31 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     @Override
+    public List<Reservation> showAllUserReservation(Long userId) {
+        return reservationRepository.findAllByUserId(userId);
+    }
+
+    @Override
+    public void deleteReservation(Long id) {
+        reservationRepository.findById(id).ifPresent(reservation -> reservationRepository.delete(reservation));
+    }
+
+    @Override
+    public Reservation findById(Long id) {
+        return reservationRepository.findById(id).orElse(null);
+    }
+    @Override
+    public void update(Reservation reservation) {
+        reservationRepository.findById(reservation.getId()).ifPresent(reservation1 -> {
+            reservation1.setSubCategory(reservation.getSubCategory());
+            reservation1.setDateTime(reservation.getDateTime());
+            reservation1.setStatus(false);
+            reservationRepository.save(reservation1);
+            javaSenderMail.sendEmail(reservation1.getUser(), reservation1.getDateTime(), reservation1.getSubCategory());
+        });
+    }
+
+    @Override
     public List<Reservation> showAllReservationWithStatusFalse() {
         return reservationRepository.findAllByStatusFalse();
     }

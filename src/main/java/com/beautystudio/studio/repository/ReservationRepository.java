@@ -13,6 +13,8 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findAllByStatusFalse();
 
+    List<Reservation> findAllByUserId(Long userId);
+
     @Modifying
     @Transactional
     void deleteByStatusTrueAndDateTimeBefore(LocalDateTime localDateTime);

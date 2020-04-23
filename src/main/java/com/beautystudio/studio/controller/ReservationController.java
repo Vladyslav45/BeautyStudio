@@ -9,10 +9,7 @@ import com.beautystudio.studio.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -44,6 +41,37 @@ public class ReservationController {
         reservationService.save(reservation, user);
         return "redirect:/";
     }
+
+
+    @GetMapping(value = "/userReservation")
+    public String showUserReservationsForm(Principal principal, Model model){
+        User user = getUser(principal);
+        List<Reservation> reservations = reservationService.showAllUserReservation(user.getId());
+        model.addAttribute("userReservations", reservations);
+        return "reservation/userReservationForm";
+    }
+
+    @GetMapping(value = "/userReservation/{reservationId}")
+    public String rejectReservation(@PathVariable("reservationId") Long reservationId){
+        reservationService.deleteReservation(reservationId);
+        return "redirect:/reservation/userReservation";
+    }
+
+    @GetMapping(value = "/editReservation/{id}")
+    public String showEditReservationForm(@PathVariable("id") Long reservationId, Model model){
+        Reservation reservation = reservationService.findById(reservationId);
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("categoryList", categories);
+        model.addAttribute("editReservation", reservation);
+        return "reservation/editReservationForm";
+    }
+
+    @PostMapping(value = "/editReservation/{id}")
+    public String editReservation(@ModelAttribute Reservation reservation){
+        reservationService.update(reservation);
+        return "redirect:/reservation/userReservation";
+    }
+
 
     private User getUser(Principal principal) {
         return userService.findById(Long.parseLong(userService.findByEmail(principal.getName()).getId().toString()));

@@ -44,6 +44,9 @@
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/update/{id} (id = ${user.id})}">Update</a>
             </li>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/reservation/userReservation}">My Reservation</a>
+            </li>
             <li>
                 <a href="#onas">
                     O nas
