@@ -36,12 +36,19 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public List<Reservation> showAllUserReservation(Long userId) {
-        return reservationRepository.findAllByUserId(userId);
+        return reservationRepository.findAllByStatusTrueAndUserId(userId);
     }
 
     @Override
     public void deleteReservation(Long id) {
-        reservationRepository.findById(id).ifPresent(reservation -> reservationRepository.delete(reservation));
+        reservationRepository.findById(id).ifPresent(reservation -> {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm a");
+            Message.creator(
+                    new PhoneNumber(reservation.getUser().getPhoneNumber()),
+                    new PhoneNumber(twilioConfiguration.getTrialNumber()),
+                    "Twoja rezerwacja na: " + reservation.getSubCategory().getName() + " w dniu " + dateTimeFormatter.format(reservation.getDateTime()) + " była odwołana").create();
+            reservationRepository.delete(reservation);
+        });
     }
 
     @Override
@@ -55,7 +62,7 @@ public class ReservationServiceImpl implements IReservationService {
             reservation1.setDateTime(reservation.getDateTime());
             reservation1.setStatus(false);
             reservationRepository.save(reservation1);
-            javaSenderMail.sendEmail(reservation1.getUser(), reservation1.getDateTime(), reservation1.getSubCategory());
+            javaSenderMail.sendEmailWhenUserMakeUpdate(reservation1.getUser(), reservation1.getDateTime(), reservation1.getSubCategory());
         });
     }
 
@@ -72,7 +79,7 @@ public class ReservationServiceImpl implements IReservationService {
             Message.creator(
                     new PhoneNumber(r.getUser().getPhoneNumber()),
                     new PhoneNumber(twilioConfiguration.getTrialNumber()),
-                    "Twoja rezerwacja na: " + r.getSubCategory().getName() + " w dniu " + dateTimeFormatter.format(r.getDateTime()) + " jest przyjeta").create();
+                    "Twoja rezerwacja na: " + r.getSubCategory().getName() + " w dniu " + dateTimeFormatter.format(r.getDateTime()) + " jest przyjęta").create();
             reservationRepository.save(r);
         });
     }

@@ -13,7 +13,7 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findAllByStatusFalse();
 
-    List<Reservation> findAllByUserId(Long userId);
+    List<Reservation> findAllByStatusTrueAndUserId(Long userId);
 
     @Modifying
     @Transactional

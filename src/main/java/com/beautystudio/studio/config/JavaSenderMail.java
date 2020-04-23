@@ -26,7 +26,16 @@ public class JavaSenderMail {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(adminEmail);
         message.setSubject("Rezerwacja");
-        message.setText(user.getName() + " chce zarezerwowac miejsce na " + subcategory.getName() + " w dniu " + dateTimeFormatter.format(dateTime));
+        message.setText(user.getName() + " chce zarezerwować miejsce na " + subcategory.getName() + " w dniu " + dateTimeFormatter.format(dateTime));
+        javaMailSender.send(message);
+    }
+
+    public void sendEmailWhenUserMakeUpdate(User user, LocalDateTime dateTime, SubCategory subcategory){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyyy h:mm");
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(adminEmail);
+        message.setSubject("Zmiana rezerwacji");
+        message.setText(user.getName() + " chce zmienić miejsce na " + subcategory.getName() + " w dniu " + dateTimeFormatter.format(dateTime));
         javaMailSender.send(message);
     }
 }
