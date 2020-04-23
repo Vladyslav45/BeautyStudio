@@ -33,6 +33,13 @@
 
         </hgroup>
     </header>
+    <div class="nav">
+        <ol>
+            <li><a href="/templates/index.html">Strona główna</a></li>
+
+        </ol>
+
+    </div>
     <div class="listaRezerwacji">
         <form th:action="@{/reservation/addReservation}" method="post" th:object="${reservation}">
             <label class="control-label">
@@ -49,7 +56,7 @@
 
                 <div class="ui calendar" id="example14">
                 </div>
-                <br/>
+                <br />
             </div>
 
 
@@ -64,7 +71,9 @@
 
 </body>
 <script>
-    $('#example14').calendar({});
+    $('#example14').calendar({
+
+    });
 </script>
 
 </html>
