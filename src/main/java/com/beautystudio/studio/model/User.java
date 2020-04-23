@@ -34,7 +34,7 @@ public class User {
     private String password;
 
     @Column
-    @Size(max = 9)
+    @Size(max = 12)
     private String phoneNumber;
 
     @Column

@@ -12,7 +12,6 @@
         <tr>
             <th>Name user</th>
             <th>Surname user</th>
-            <th>Category</th>
             <th>SubCategory</th>
             <th>Date & Time</th>
         </tr>
@@ -22,7 +21,7 @@
             <td th:text="${reservation.user.name}"></td>
             <td th:text="${reservation.user.surname}"></td>
             <td th:text="${reservation.subCategory.name}"></td>
-            <td th:text="${#temporals.format(reservation.dateTime, 'yyyy-MM-dd h:mm')}"></td>
+            <td th:text="${#temporals.format(reservation.dateTime, 'MM-dd-yyyy h:mm')}"></td>
             <td><a th:href="@{reservation/{reservationId} (reservationId = ${reservation.id})}">Accept</a></td>
         </tr>
         </tbody>
