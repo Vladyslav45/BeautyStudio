@@ -1,28 +1,55 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/css/StaticUserReservationForm.css"
+          th:href="@{/css/StaticUserReservationForm.css}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Moje rezerwacje</title>
 </head>
+
+
 <body>
+<header>
+
+    <hgroup class="welcome">
+        <h1>Moje rezerwacje</h1>
+
+
+    </hgroup>
+</header>
+
+
 <form th:action="@{userReservation}" method="get" th:object="${userReservations}">
-    <table th:each="userReservation : ${userReservations}">
+    <table class="content-table" >
         <thead>
         <tr>
-            <th>Subcategory</th>
-            <th>Date & Time</th>
+            <th>Nazwa usługi</th>
+            <th>Data i godzina rezerwacji</th>
+            <th colspan="2"></th>
+
         </tr>
         </thead>
-        <tbody>
+        <tbody th:each="userReservation : ${userReservations}"
+
+
         <tr>
             <td th:text="${userReservation.subCategory.name}"></td>
             <td th:text="${userReservation.dateTime}"></td>
-            <td><a th:href="@{editReservation/{id} (id = ${userReservation.id})}">Edit</a></td>
-            <td><a th:href="@{userReservation/{reservationId} (reservationId = ${userReservation.id})}">Reject</a></td>
+
+
+            <td><button class="reg" th:href="@{editReservation/{id} (id = ${userReservation.id})}">Edytuj</button></td>
+            <td><button class="reg" th:href="@{userReservation/{reservationId} (reservationId = ${userReservation.id})}">Usuń</button>
+            </td>
         </tr>
         </tbody>
+
+
     </table>
+    <div>
+        <a class="home" th:href="@{/}">Strona główna</a>
+    </div>
 </form>
 
 </body>
+
 </html>
