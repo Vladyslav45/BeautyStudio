@@ -5,10 +5,12 @@
  Dziedzina problemowa<br>
  Projekt saolon kosmetyczny "Nowa WySPA" to aplikacja webowa umożliwiająca przeglądanie oferty salonu
   oraz możliwość umówienia wizyty zabiegu na konkretny dzień i godzinę.<br><br>
+  
   2. Zespół <br>
   Vladyslav Kopachovets kierownik(programista)<br>
   Andrzej Pękala programista <br>
   Dawid Wiktorowski programsita <br><br>
+  
   3. Uogólniony przebieg prac
   - Prace organizacyjne, ustalenia techniczne oraz podział obowiązków<br>
   - Utworzenie repozytorium, szkieletu aplikacji oraz bazy danych<br>
@@ -20,6 +22,7 @@
   - Rozpoczęcie testów.
   - Poprawki błędów.
   - Prace nad dokumentacją.<br>
+  
   4. Wykorzystane technologie:
   - Java
   - Spring
@@ -27,6 +30,7 @@
   - CSS
   - Java Script
   - SQL<br>
+  
   5. Funkcjonalności systemu<br>
   Aplikacja posiada szereg funkcjonalności związanych z kontem użytkownika:
   - Rejestracja użytkownika,
