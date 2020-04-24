@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap" rel="stylesheet">
     <title>upadateForm</title>
-    <link rel="stylesheet" th:href="@{/css/StyleUpdateForm.css}" href="../static/css/StyleUpdateForm.css.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/StyleUpdateForm.css}" href="/static/css/StyleUpdateForm.css" type="text/css">
 </head>
 <body>
 <main>
@@ -35,11 +35,8 @@
                             <input type="text" name="phone" placeholder="Telefon" autofocus
                                    th:field="*{phoneNumber}" >
 
-                            <button type="submit" value="Zmień"></button>
-                            <a id="przycisk" onclick="goBack()">Zatwierdź zmianę danych</a>
-
-
-
+                            <button type="submit" value="Zmień">Zatwierdź zmianę danych</button>
+                            <a id="przycisk" onclick="goBack()">Powrot do strony glownej</a>
                         </div>
                     </form>
                 </div>
