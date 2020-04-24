@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/styleSubCategory.css" th:href="@{/css/styleSubCategory.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/styleNavbar.css" th:href="@{/css/styleNavbar.css}">
 </head>
 <body>
-
+<th:block th:replace="fragments/navbar :: nav"/>
 <form th:action="@{/admin/addSubCategory}" method="post" th:object="${subcategory}">
-    <input type="text" th:field="*{name}">
-    <input type="text" th:field="*{price}">
-    <label>
+    <label>Write name subCategory</label><br>
+    <input type="text" th:field="*{name}"><br>
+    <label>Write price</label><br>
+    <input type="text" th:field="*{price}"><br>
+    <label>Enter category</label><br>
         <select th:field="*{category}">
             <option value=""> --</option>
             <option th:each="category : ${categories}"
                     th:value="${category.id}"
                     th:text="${category.name}"></option>
-        </select>
-    </label>
-    <button type="submit" value="Add SubCategory"></button>
+        </select><br>
+    <button class="addsub" type="submit" value="Add">Add</button>
+    <a class="home" th:href="@{main}">Back home</a>
 </form>
 
 </body>

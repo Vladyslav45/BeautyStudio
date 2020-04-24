@@ -3,36 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Panel</title>
-</head>
-<!DOCTYPE html>
-<html>
-<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/styleAdminPanel.css" th:href="@{/css/styleAdminPanel.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/styleAdminPanel.css" th:href="@{/css/styleAdminPanel.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/styleNavbar.css" th:href="@{/css/styleNavbar.css}">
 </head>
-<body>
-<div th:action="@{main}" th:object="${categories}">
-    <ul id="menu">
-        <li><a>Admin panel</a></li>
-        <li>
-            <a>Categories</a>
-            <ul>
-                <li><a th:href="@{addCategory}">Add category</a></li>
-                <li><a th:href="@{addSubCategory}">Add subCategory</a></li>
-            </ul>
-        </li>
-        <li><a th:href="@{reservation}">Reservations</a></li>
-        <li><a th:href="@{/logout}">Log out</a></li>
-    </ul>
 
+<body>
+<th:block th:replace="fragments/navbar :: nav"/>
+<div th:action="@{main}" th:object="${categories}">
     <section>
-        <div th:each="category : ${categories}">
+        <div class="category" th:each="category : ${categories}">
             <h2 th:text="${category.name}"></h2>
-            <div th:each="subcategory : ${category.subCategoryList}">
+            <div class="subcategory" th:each="subcategory : ${category.subCategoryList}">
                 <p th:text="${subcategory.name} + ' - ' + ${subcategory.price} + zł"></p>
             </div>
-
         </div>
     </section>
 </div>
