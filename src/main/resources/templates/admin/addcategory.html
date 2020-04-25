@@ -10,7 +10,7 @@
 <th:block th:replace="fragments/navbar :: nav"/>
 <form th:action="@{/admin/addCategory}" method="post" th:object="${category}">
     <label>Enter category</label><br>
-    <input type="text" th:field="*{name}"><br>
+    <input type="text" th:field="*{name}" required maxlength="40"><br>
     <button class="add" type="submit" value="Add">Add</button>
     <a class="home" th:href="@{main}">Back home</a>
 </form>

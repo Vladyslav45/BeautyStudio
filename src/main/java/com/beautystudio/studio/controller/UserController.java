@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -50,12 +51,19 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public String registrationUser(@ModelAttribute User user, @RequestParam String pemail, @RequestParam String pass){
-        if (pemail.equals(user.getEmail()) && pass.equals(user.getPassword())) {
+    public String registrationUser(@ModelAttribute User user, @RequestParam String pemail, @RequestParam String pass, BindingResult result, Model model){
+
+        if (!pemail.equals(user.getEmail())){
+            model.addAttribute("pemailError", "Email nie pasuja");
+            return "register";
+        } else if (!pass.equals(user.getPassword())){
+            model.addAttribute("passError", "Hasla nie pasuja");
+            return "register";
+        } else if (result.hasErrors()){
+            return "register";
+        } else {
             iUserService.saveUser(user);
             return "redirect:/login";
-        } else {
-            return "register";
         }
     }
 

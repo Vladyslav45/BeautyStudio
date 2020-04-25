@@ -93,10 +93,10 @@ input:-moz-placeholder {
 
 #register .inputs input[type=email],
 input[type=password],
-input[type=imie],
-input[type=nazwisko],
-input[type=powtorzEmail],
-input[type=telefon],
+#imie,
+#nazwisko,
+#powtorzEmail,
+#telefon,
 input[type=password] {
     background: #F5F5F5;
     font-size: 0.8rem;
@@ -114,10 +114,10 @@ input[type=password] {
 
 #register .inputs input[type=email]:focus,
 input[type=password]:focus,
-input[type=imie]:focus,
-input[type=nazwisko]:focus,
-input[type=powtorzEmail]:focus,
-input[type=telefon]:focus,
+#imie:focus,
+#nazwisko:focus,
+#powtorzEmail:focus,
+#telefon:focus,
 input[type=password]:focus {
     background: #FFF;
     box-shadow: 0px, 0px, 0px, 3px #FFF38e, inset 0px 2px 3px rgba(0, 0, 0, 0.2),
@@ -171,6 +171,10 @@ input[type=password]:focus {
 #register .inputs  input[type=submit]:hover{
     color: red;
     cursor: pointer;
+}
+
+span{
+    color: red;
 }
 
 

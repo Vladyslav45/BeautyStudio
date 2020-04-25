@@ -186,6 +186,9 @@ input[type=password]:focus {
     cursor: pointer;
 }
 
+#error{
+    color: red;
+}
 
 footer {
     text-align: center;

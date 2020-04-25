@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class User {
     private String surname;
 
     @Column
+    @Email
     private String email;
 
     @Column

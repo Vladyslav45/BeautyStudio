@@ -27,7 +27,7 @@
 
 <form th:action="@{/reservation/addReservation}" method="post" th:object="${reservation}">
     <label>Wybierz usluge</label><br>
-    <select class="select"  th:field="*{subCategory}">
+    <select class="select"  th:field="*{subCategory}" required>
         <optgroup th:each="category : ${categoryList}" th:label="${category.name}">
             <option th:each="subcategory : ${category.subCategoryList}" th:value="${subcategory.id}" th:text="${subcategory.name}"></option>
         </optgroup>
@@ -36,7 +36,7 @@
     <div class="container">
                 <div class="form-group">
                     <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' th:field="*{dateTime}" class="form-control" />
+                        <input type='text' th:field="*{dateTime}" required class="form-control" />
                         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>

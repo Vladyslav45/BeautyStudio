@@ -26,13 +26,29 @@
 
                     <div class="line"></div>
                     <div class="inputs">
-                        <input type="imie" name="name" th:field="*{name}" placeholder="Imie" autofocus/>
-                        <input type="nazwisko" name="surname" th:filed="*{surname}" placeholder="Nazwisko" autofocus/>
-                        <input type="email" name="email" th:field="*{email}" placeholder="Adres email" autofocus/>
-                        <input type="powtorzEmail" name="pemail" placeholder="Powtórz email" autofocus/>
-                        <input type="telefon" name="phoneNumber" th:field="*{phoneNumber}" placeholder="+48XXXXXXXXX" autofocus/>
-                        <input type="password" name="password" th:fied="*{password}" placeholder="Haslo" autofocus/>
-                        <input type="password" name="pass" placeholder="Powtórz Haslo" autofocus/>
+                        <div>
+                            <input type="text" id="imie" name="name" th:field="*{name}" maxlength="40" placeholder="Imie" required autofocus/>
+                        </div>
+                        <div>
+                            <input type="text" id="nazwisko" name="surname" th:filed="*{surname}" maxlength="60" placeholder="Nazwisko" required autofocus/>
+                        </div>
+                        <div>
+                            <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" th:field="*{email}" placeholder="Adres email" required autofocus/>
+                        </div>
+                        <div>
+                            <input type="email" id="powtorzEmail" name="pemail" placeholder="Powtórz email" required autofocus/>
+                            <span class="text-danger align-middle" th:if="${pemailError}" th:text="${pemailError}"></span>
+                        </div>
+                        <div>
+                            <input type="tel" id="telefon" name="phoneNumber" pattern='(\+48)\d{9}' maxlength="12" th:field="*{phoneNumber}" placeholder="+48XXXXXXXXX" required autofocus/>
+                        </div>
+                        <div>
+                            <input type="password" name="password" th:fied="*{password}" minlength="6" placeholder="Haslo" required autofocus/>
+                        </div>
+                        <div>
+                            <input type="password" name="pass" placeholder="Powtórz Haslo" required autofocus/>
+                            <span class="text-danger align-middle" th:if="${passError}" th:text="${passError}"></span>
+                        </div>
                         <input type="submit" value="Zarejestruj się">
                     </div>
                 </form>

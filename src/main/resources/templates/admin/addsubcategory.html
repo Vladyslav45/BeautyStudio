@@ -10,11 +10,11 @@
 <th:block th:replace="fragments/navbar :: nav"/>
 <form th:action="@{/admin/addSubCategory}" method="post" th:object="${subcategory}">
     <label>Write name subCategory</label><br>
-    <input type="text" th:field="*{name}"><br>
+    <input type="text" th:field="*{name}" required maxlength="40"><br>
     <label>Write price</label><br>
-    <input type="text" th:field="*{price}"><br>
+    <input type="text" th:field="*{price}" required><br>
     <label>Enter category</label><br>
-        <select th:field="*{category}">
+        <select th:field="*{category}" required>
             <option value=""> --</option>
             <option th:each="category : ${categories}"
                     th:value="${category.id}"

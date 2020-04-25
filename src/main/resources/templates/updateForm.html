@@ -24,15 +24,15 @@
                         <div class="line"></div>
                         <div class="inputs">
 
-                            <input type="text" name="name" placeholder="Imię" autofocus th:field="*{name}" >
+                            <input type="text" name="name" placeholder="Imię" autofocus th:field="*{name}" maxlength="40" required>
 
-                            <input type="text" name="surname" placeholder="Nazwisko" autofocus
+                            <input type="text" name="surname" placeholder="Nazwisko" maxlength="60" required autofocus
                                    th:field="*{surname}" >
 
-                            <input type="email" name="email" placeholder="Email" autofocus th:field="*{email}" >
+                            <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" required autofocus th:field="*{email}" >
 
 
-                            <input type="text" name="phone" placeholder="Telefon" autofocus
+                            <input type="text" name="phone" pattern='(\+48)\d{9}' maxlength="12" placeholder="Telefon" required autofocus
                                    th:field="*{phoneNumber}" >
 
                             <button type="submit" value="Zmień">Zatwierdź zmianę danych</button>
