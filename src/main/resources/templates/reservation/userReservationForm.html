@@ -37,8 +37,8 @@
             <td th:text="${userReservation.dateTime}"></td>
 
 
-            <td><button class="reg" th:href="@{editReservation/{id} (id = ${userReservation.id})}">Edytuj</button></td>
-            <td><button class="reg" th:href="@{userReservation/{reservationId} (reservationId = ${userReservation.id})}">Usuń</button>
+            <td><a class="reg" th:href="@{editReservation/{id} (id = ${userReservation.id})}">Edytuj</a></td>
+            <td><a class="reg" th:href="@{userReservation/{reservationId} (reservationId = ${userReservation.id})}">Usuń</a>
             </td>
         </tr>
         </tbody>
