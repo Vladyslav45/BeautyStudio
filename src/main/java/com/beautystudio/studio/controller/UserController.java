@@ -1,7 +1,9 @@
 package com.beautystudio.studio.controller;
 
 import com.beautystudio.studio.config.JavaSenderMail;
+import com.beautystudio.studio.model.Category;
 import com.beautystudio.studio.model.User;
+import com.beautystudio.studio.service.ICategoryService;
 import com.beautystudio.studio.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,14 +27,19 @@ public class UserController {
     private IUserService iUserService;
 
     @Autowired
+    private ICategoryService categoryService;
+
+    @Autowired
     private JavaSenderMail javaSenderMail;
 
     @GetMapping(value = "/")
     public String showRolePage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = iUserService.findByEmail(authentication.getName());
+        List<Category> categories = categoryService.findAll();
         if (user == null || user.getRole().getRoleType().equals("ROLE_USER")){
             model.addAttribute("user", user);
+            model.addAttribute("categories", categories);
             return "index";
         } else if (user.getRole().getRoleType().equals("ROLE_ADMIN")){
             return "redirect:/admin/main";
