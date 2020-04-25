@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceImplTest {
 
@@ -22,13 +21,13 @@ class UserServiceImplTest {
         long countBeforeCall =  memoryUserRepository.count();
         memoryUserRepository.save(memoryUser);
 
-        memoryUserRepository.findById(memoryUser.getId()).ifPresent(updateUser -> {
+        User updateUser = memoryUserRepository.findById(memoryUser.getId()).orElse(null);
+        if (updateUser != null) {
             updateUser.setName(memoryUser.getName());
             updateUser.setSurname(memoryUser.getSurname());
             updateUser.setEmail(memoryUser.getEmail());
             updateUser.setPhoneNumber(memoryUser.getPhoneNumber());
-            memoryUserRepository.save(updateUser);
-        });
+        }
         assertThat(countBeforeCall+1)
                 .isEqualTo(memoryUserRepository.count());
 }
@@ -50,6 +49,11 @@ class UserServiceImplTest {
             private Map<Long,User> map = new HashMap<>();
             @Override
             public User findByEmail(String email) {
+                return null;
+            }
+
+            @Override
+            public User findByResetToken(String resetToken) {
                 return null;
             }
 

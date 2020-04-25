@@ -12,7 +12,7 @@ public class Scheduler {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @Scheduled(cron = "15 * * * * ?")
+    @Scheduled(cron = "* 23 * * * ?")
     public void deleteReservationWhenDateTimeIsOlder(){
         LocalDateTime localDateTime = LocalDateTime.now();
         reservationRepository.deleteByStatusTrueAndDateTimeBefore(localDateTime);
