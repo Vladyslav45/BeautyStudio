@@ -3,13 +3,13 @@
 
 1. Wstęp i harmonogram tworzenia aplikacji<br>
  Dziedzina problemowa<br>
- Projekt saolon kosmetyczny "Nowa WySPA" to aplikacja webowa umożliwiająca przeglądanie oferty salonu
+ Projekt salon kosmetyczny "Nowa WySPA" to aplikacja webowa umożliwiająca przeglądanie oferty salonu
   oraz możliwość umówienia wizyty zabiegu na konkretny dzień i godzinę.<br><br>
   
 2. Zespół <br>
   Vladyslav Kopachovets kierownik(programista)<br>
   Andrzej Pękala programista <br>
-  Dawid Wiktorowski programsita <br><br>
+  Dawid Wiktorowski programista <br><br>
   
 3. Uogólniony przebieg prac
   - Prace organizacyjne, ustalenia techniczne oraz podział obowiązków<br>
