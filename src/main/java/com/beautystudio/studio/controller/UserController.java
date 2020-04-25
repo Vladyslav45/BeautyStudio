@@ -1,5 +1,6 @@
 package com.beautystudio.studio.controller;
 
+import com.beautystudio.studio.config.JavaSenderMail;
 import com.beautystudio.studio.model.User;
 import com.beautystudio.studio.service.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -11,12 +12,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+import java.util.UUID;
+
 @Controller
 @RequiredArgsConstructor
 public class UserController {
 
     @Autowired
     private IUserService iUserService;
+
+    @Autowired
+    private JavaSenderMail javaSenderMail;
 
     @GetMapping(value = "/")
     public String showRolePage(Model model){
@@ -36,10 +44,10 @@ public class UserController {
                         @RequestParam(value = "logout", required = false) String logout,
                         Model model){
         if (error != null){
-            model.addAttribute("messageerror", "Invalid email or password");
+            model.addAttribute("messageerror", "Nieprawidłowy e-mail lub hasło");
         }
         if (logout != null){
-            model.addAttribute("messagelogout", "You've been logged out successfully");
+            model.addAttribute("messagelogout", "Wylogowano pomyślnie");
         }
         return "login";
     }
@@ -52,12 +60,15 @@ public class UserController {
 
     @PostMapping(value = "/register")
     public String registrationUser(@ModelAttribute User user, @RequestParam String pemail, @RequestParam String pass, BindingResult result, Model model){
-
-        if (!pemail.equals(user.getEmail())){
-            model.addAttribute("pemailError", "Email nie pasuja");
+        User u = iUserService.findByEmail(user.getEmail());
+        if (u != null){
+            model.addAttribute("email", "Ten email jest zarejestrowany");
+            return "register";
+        } else if (!pemail.equals(user.getEmail())){
+            model.addAttribute("pemailError", "Email nie pasują");
             return "register";
         } else if (!pass.equals(user.getPassword())){
-            model.addAttribute("passError", "Hasla nie pasuja");
+            model.addAttribute("passError", "Hasła nie pasują");
             return "register";
         } else if (result.hasErrors()){
             return "register";
@@ -78,5 +89,50 @@ public class UserController {
     public String updateUser(@ModelAttribute User user){
         iUserService.update(user);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/forgot")
+    public String showForgotPasswordForm(){
+        return "emailCheckForm";
+    }
+
+    @PostMapping(value = "/forgot")
+    public String processForgotPasswordForm(@RequestParam("email") String userEmail, HttpServletRequest request, Model model) {
+        User user = iUserService.findByEmail(userEmail);
+        if (user == null) {
+            model.addAttribute("errorMessage", "Nie znaleźliśmy konta dla tego adresu e-mail.");
+        } else {
+            user.setResetToken(UUID.randomUUID().toString());
+            iUserService.saveToken(user);
+            String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+            javaSenderMail.sendEmailWithResetToken(user, appUrl);
+            model.addAttribute("successMessage", "Link do resetowania hasła został wysłany na adres " + userEmail);
+        }
+        return "emailCheckForm";
+    }
+
+    @GetMapping(value = "/reset")
+    public String showResetPasswordForm(@RequestParam("token") String token, Model model) {
+
+        User user = iUserService.findResetToken(token);
+        if (user != null) {
+            model.addAttribute("resetToken", token);
+        } else {
+            model.addAttribute("errorMessage", "Oops!  To jest nieprawidłowy link do resetowania hasła..");
+        }
+        return "forgotPasswordForm";
+    }
+
+    @PostMapping(value = "/reset")
+    public String setNewPassword(Model model, @RequestParam Map<String, String> requestParams) {
+
+        User user = iUserService.findResetToken(requestParams.get("token"));
+        if (user != null){
+            iUserService.forgetPassword(user,requestParams);
+            return "redirect:/login";
+        }  else {
+            model.addAttribute("errorLink", "Oops!  To jest nieprawidłowy link do resetowania hasła..");
+            return "forgotPasswordForm";
+        }
     }
 }

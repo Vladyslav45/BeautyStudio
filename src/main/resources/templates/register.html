@@ -34,6 +34,7 @@
                         </div>
                         <div>
                             <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" th:field="*{email}" placeholder="Adres email" required autofocus/>
+                            <span class="text-danger align-middle" th:if="${email}" th:text="${email}"></span>
                         </div>
                         <div>
                             <input type="email" id="powtorzEmail" name="pemail" placeholder="Powtórz email" required autofocus/>
@@ -43,7 +44,7 @@
                             <input type="tel" id="telefon" name="phoneNumber" pattern='(\+48)\d{9}' maxlength="12" th:field="*{phoneNumber}" placeholder="+48XXXXXXXXX" required autofocus/>
                         </div>
                         <div>
-                            <input type="password" name="password" th:fied="*{password}" minlength="6" placeholder="Haslo" required autofocus/>
+                            <input type="password" name="password" th:field="*{password}" minlength="6" placeholder="Haslo" required autofocus/>
                         </div>
                         <div>
                             <input type="password" name="pass" placeholder="Powtórz Haslo" required autofocus/>

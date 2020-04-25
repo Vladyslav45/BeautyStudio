@@ -38,4 +38,13 @@ public class JavaSenderMail {
         message.setText(user.getName() + " chce zmienić miejsce na " + subcategory.getName() + " w dniu " + dateTimeFormatter.format(dateTime));
         javaMailSender.send(message);
     }
+
+    public void sendEmailWithResetToken(User user, String URL){
+        SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
+        passwordResetEmail.setTo(user.getEmail());
+        passwordResetEmail.setSubject("Password Reset Request");
+        passwordResetEmail.setText("To reset your password, click the link below:\n" + URL
+                + "/reset?token=" + user.getResetToken());
+        javaMailSender.send(passwordResetEmail);
+    }
 }
