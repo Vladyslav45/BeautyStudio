@@ -929,7 +929,7 @@ aside.show {
 /*Sekcja slogan*/
 .slogan {
     text-align: center;
-    background-image: url(static/images/800_1.jpg);
+    background-image: url(../images/800_1.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1023,7 +1023,7 @@ aside.show {
 
 .cennik {
     text-align: center;
-    background-image: url(static/images/800_18.jpg);
+    background-image: url(../images/800_18.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1132,19 +1132,19 @@ aside.show {
 }
 
 .galeria .item:nth-of-type(1) {
-    background-image: url(static/images/SalonNowaWyspa1.jpg);
+    background-image: url(../images/SalonNowaWyspa1.jpg);
 }
 
 .galeria .item:nth-of-type(2) {
-    background-image: url(static/images/SalonNowaWyspa2.jpg);
+    background-image: url(../images/SalonNowaWyspa2.jpg);
 }
 
 .galeria .item:nth-of-type(3) {
-    background-image: url(static/images/SalonNowaWyspa3.jpg);
+    background-image: url(../images/SalonNowaWyspa3.jpg);
 }
 
 .galeria .item:nth-of-type(4) {
-    background-image: url(static/images/SalonNowaWyspa4.jpg);
+    background-image: url(../images/SalonNowaWyspa4.jpg);
 }
 
 .galeria .item p {
