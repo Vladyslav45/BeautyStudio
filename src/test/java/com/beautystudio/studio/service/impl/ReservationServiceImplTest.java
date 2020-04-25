@@ -15,9 +15,12 @@ import org.springframework.data.domain.Sort;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.DoubleStream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.longThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,27 +31,64 @@ class ReservationServiceImplTest {
     User memoryUser = inMemoryUser();
     Reservation memoryReservation = inMemoryReservation();
     ReservationRepository memoryReservationRepository = inMemoryReservationRepository();
+    long countBeforeCall =  memoryReservationRepository.count();
     memoryReservation.setStatus(false);
     memoryReservation.setUser(memoryUser);
     memoryReservationRepository.save(memoryReservation);
 
     assertTrue(!memoryReservationRepository.findAll().isEmpty());
     assertTrue(memoryReservationRepository.findById(memoryReservation.getId()).isPresent());
+
+    assertThat(countBeforeCall+1)
+            .isEqualTo(memoryReservationRepository.count());
     }
+
+    @Test
+    void delete_Repository(){
+        Reservation memoryReservation = inMemoryReservation();
+        ReservationRepository memoryReservationRepository = inMemoryReservationRepository();
+        memoryReservationRepository.save(memoryReservation);
+        long countBeforeDelete = memoryReservationRepository.count();
+
+        memoryReservationRepository.findById(memoryReservation.getId()).ifPresent(reservation ->
+                memoryReservationRepository.delete(reservation));
+        assertThat(countBeforeDelete-1)
+                .isEqualTo(memoryReservationRepository.count());
+    }
+
+    @Test
+    void update_Reservation(){
+        Reservation memoryReservation = inMemoryReservation();
+        ReservationRepository memoryReservationRepository = inMemoryReservationRepository();
+        memoryReservationRepository.save(memoryReservation);
+        boolean memory = memoryReservation.isStatus();
+
+        memoryReservationRepository.findById(memoryReservation.getId()).ifPresent(reservation1 ->{
+                    reservation1.setSubCategory(memoryReservation.getSubCategory());
+                    reservation1.setStatus(false);
+                    memoryReservationRepository.save(reservation1);
+                });
+
+        assertThat(memoryReservation.isStatus()).isNotEqualTo(memory);
+    }
+
 
     private User inMemoryUser(){
         User user = new User();
         user.setName("John");
         user.setId(1l);
         user.setSurname("McDonald");
-        user.setEmail("pekalaandrzej50@gmail.com");
-        user.setPhoneNumber("+48510285442");
+        user.setEmail("admin@gmail.com");
+        user.setPhoneNumber("+48555222444");
         return user;
     }
 
     private Reservation inMemoryReservation(){
+        SubCategory subCategory = new SubCategory();
+        subCategory.setName("brwi");
         Reservation reservation = new Reservation();
         reservation.setId(2l);
+        reservation.setSubCategory(subCategory);
         reservation.setStatus(true);
         return reservation;
     }
@@ -57,6 +97,8 @@ class ReservationServiceImplTest {
         ReservationRepository reservationRepository = new ReservationRepository() {
             private long index = 0;
             private Map<Long,Reservation> map = new HashMap<>();
+
+
             @Override
             public List<Reservation> findAllByStatusFalse() {
                 return null;
@@ -154,7 +196,7 @@ class ReservationServiceImplTest {
 
             @Override
             public long count() {
-                return 0;
+                return map.values().size();
             }
 
             @Override
@@ -164,6 +206,7 @@ class ReservationServiceImplTest {
 
             @Override
             public void delete(Reservation reservation) {
+                map.remove(reservation.getId());
 
             }
 
