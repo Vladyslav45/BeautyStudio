@@ -10,8 +10,13 @@
     <span id="error" class="text-danger align-middle" th:if="${errorMessage}" th:text="${errorMessage}"></span><br>
     <span id="succes" class="text-danger align-middle" th:if="${successMessage}" th:text="${successMessage}"></span><br>
     <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Podaj email" required autofocus><br>
-    <button class="check" type="submit" value="Check">Check</button>
+    <button class="check" type="submit" value="Check">Check</button><br>
+    <a id="back" onclick="goBack()">Powrot</a>
 </form>
-
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>
